@@ -34,18 +34,41 @@ class ControllerCommonFooter extends Controller {
 		}
 
 		$data['contact'] = $this->url->link('information/contact');
-		$data['return'] = $this->url->link('account/return/add', '', true);
+		$data['return'] = $this->url->link('account/return/add', '', 'SSL');
 		$data['sitemap'] = $this->url->link('information/sitemap');
 		$data['manufacturer'] = $this->url->link('product/manufacturer');
-		$data['voucher'] = $this->url->link('account/voucher', '', true);
-		$data['affiliate'] = $this->url->link('affiliate/account', '', true);
+		$data['voucher'] = $this->url->link('account/voucher', '', 'SSL');
+		$data['affiliate'] = $this->url->link('affiliate/account', '', 'SSL');
 		$data['special'] = $this->url->link('product/special');
-		$data['account'] = $this->url->link('account/account', '', true);
-		$data['order'] = $this->url->link('account/order', '', true);
-		$data['wishlist'] = $this->url->link('account/wishlist', '', true);
-		$data['newsletter'] = $this->url->link('account/newsletter', '', true);
+		$data['account'] = $this->url->link('account/account', '', 'SSL');
+		$data['order'] = $this->url->link('account/order', '', 'SSL');
+		$data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
+		$data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
 
 		$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+		
+		
+		$data['footerbottom'] = $this->load->controller('common/footerbottom');
+		$data['footerleft'] = $this->load->controller('common/footerleft');
+		$data['footerright'] = $this->load->controller('common/footerright');
+		
+		// Manufacture
+		$this->language->load('product/manufacturer');
+
+		$this->load->model('catalog/manufacturer');
+		
+		$data['manufacturer_list'] = array();
+		
+		$manufacturers = $this->model_catalog_manufacturer->getManufacturers();
+		
+		foreach ($manufacturers as $manufacturer_list) {
+			$data['manufacturer_list'][] = array(
+				'name' => $manufacturer_list['name'],
+				'href' => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer_list['manufacturer_id'])
+			);
+		}
+		//End Manufacure
+		
 
 		// Whos Online
 		if ($this->config->get('config_customer_online')) {
@@ -71,7 +94,17 @@ class ControllerCommonFooter extends Controller {
 
 			$this->model_tool_online->addOnline($ip, $this->customer->getId(), $url, $referer);
 		}
+		
+		$data['footerbottom'] = $this->load->controller('common/footerbottom');
+		$data['footerleft'] = $this->load->controller('common/footerleft');
+		$data['footerright'] = $this->load->controller('common/footerright');
 
-		return $this->load->view('common/footer', $data);
+
+
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {
+			return $this->load->view($this->config->get('config_template') . '/template/common/footer.tpl', $data);
+		} else {
+			return $this->load->view('default/template/common/footer.tpl', $data);
+		}
 	}
 }

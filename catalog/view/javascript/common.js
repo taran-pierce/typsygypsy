@@ -23,38 +23,40 @@ function getURLVar(key) {
 }
 
 $(document).ready(function() {
+	
+	
 	// Highlight any found errors
 	$('.text-danger').each(function() {
 		var element = $(this).parent().parent();
-
+		
 		if (element.hasClass('form-group')) {
 			element.addClass('has-error');
 		}
 	});
-
+		
 	// Currency
-	$('#form-currency .currency-select').on('click', function(e) {
+	$('#currency .currency-select').on('click', function(e) {
 		e.preventDefault();
 
-		$('#form-currency input[name=\'code\']').attr('value', $(this).attr('name'));
+		$('#currency input[name=\'code\']').attr('value', $(this).attr('name'));
 
-		$('#form-currency').submit();
+		$('#currency').submit();
 	});
 
 	// Language
-	$('#form-language .language-select').on('click', function(e) {
+	$('#language a').on('click', function(e) {
 		e.preventDefault();
 
-		$('#form-language input[name=\'code\']').attr('value', $(this).attr('name'));
+		$('#language input[name=\'code\']').attr('value', $(this).attr('href'));
 
-		$('#form-language').submit();
-	})
+		$('#language').submit();
+	});
 
 	/* Search */
 	$('#search input[name=\'search\']').parent().find('button').on('click', function() {
-		var url = $('base').attr('href') + 'index.php?route=product/search';
+		url = $('base').attr('href') + 'index.php?route=product/search';
 
-		var value = $('header input[name=\'search\']').val();
+		var value = $('input[name=\'search\']').val();
 
 		if (value) {
 			url += '&search=' + encodeURIComponent(value);
@@ -65,7 +67,7 @@ $(document).ready(function() {
 
 	$('#search input[name=\'search\']').on('keydown', function(e) {
 		if (e.keyCode == 13) {
-			$('header input[name=\'search\']').parent().find('button').trigger('click');
+			$('input[name=\'search\']').parent().find('button').trigger('click');
 		}
 	});
 
@@ -85,15 +87,18 @@ $(document).ready(function() {
 	$('#list-view').click(function() {
 		$('#content .product-grid > .clearfix').remove();
 
+		//$('#content .product-layout').attr('class', 'product-layout product-list col-xs-12');
 		$('#content .row > .product-grid').attr('class', 'product-layout product-list col-xs-12');
-
+		
 		localStorage.setItem('display', 'list');
 	});
 
 	// Product Grid
 	$('#grid-view').click(function() {
+		
+
 		// What a shame bootstrap does not take into account dynamically loaded columns
-		var cols = $('#column-right, #column-left').length;
+		cols = $('#column-right, #column-left').length;
 
 		if (cols == 2) {
 			$('#content .product-list').attr('class', 'product-layout product-grid col-lg-6 col-md-6 col-sm-12 col-xs-12');
@@ -103,7 +108,7 @@ $(document).ready(function() {
 			$('#content .product-list').attr('class', 'product-layout product-grid col-lg-3 col-md-3 col-sm-6 col-xs-12');
 		}
 
-		localStorage.setItem('display', 'grid');
+		 localStorage.setItem('display', 'grid');
 	});
 
 	if (localStorage.getItem('display') == 'list') {
@@ -137,11 +142,11 @@ var cart = {
 			data: 'product_id=' + product_id + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
 			dataType: 'json',
 			beforeSend: function() {
-				$('#cart > button').button('loading');
+				$('#cart .cart_button').button('loading');
 			},
 			complete: function() {
-				$('#cart > button').button('reset');
-			},
+				$('#cart .cart_button').button('reset');
+			},			
 			success: function(json) {
 				$('.alert, .text-danger').remove();
 
@@ -150,20 +155,22 @@ var cart = {
 				}
 
 				if (json['success']) {
-					$('#content').parent().before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
+					$('.common-home .content_breadcum').after('<div class="alert alert-success container"><i class="fa fa-check-circle"></i> ' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					
+					$('ul.breadcrumb').after('<div class="alert alert-success container"><i class="fa fa-check-circle"></i> ' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					
 					// Need to set timeout otherwise it wont update the total
 					setTimeout(function () {
-						$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+						$('#cart .cart_button').html('<div id="cart-total">' + json['total'] + '</div>');
 					}, 100);
-
+				
 					$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 					$('#cart > ul').load('index.php?route=common/cart/info ul li');
 				}
 			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+	        error: function(xhr, ajaxOptions, thrownError) {
+	            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		});
 	},
@@ -174,15 +181,15 @@ var cart = {
 			data: 'key=' + key + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
 			dataType: 'json',
 			beforeSend: function() {
-				$('#cart > button').button('loading');
+				$('#cart .cart_button').button('loading');
 			},
 			complete: function() {
-				$('#cart > button').button('reset');
-			},
+				$('#cart .cart_button').button('reset');
+			},			
 			success: function(json) {
 				// Need to set timeout otherwise it wont update the total
 				setTimeout(function () {
-					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					$('#cart .cart_button').html('<div id="cart-total">' + json['total'] + '</div>');
 				}, 100);
 
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
@@ -190,9 +197,6 @@ var cart = {
 				} else {
 					$('#cart > ul').load('index.php?route=common/cart/info ul li');
 				}
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		});
 	},
@@ -203,25 +207,22 @@ var cart = {
 			data: 'key=' + key,
 			dataType: 'json',
 			beforeSend: function() {
-				$('#cart > button').button('loading');
+				$('#cart .cart_button').button('loading');
 			},
 			complete: function() {
-				$('#cart > button').button('reset');
-			},
+				$('#cart .cart_button').button('reset');
+			},			
 			success: function(json) {
 				// Need to set timeout otherwise it wont update the total
 				setTimeout(function () {
-					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					$('#cart .cart_button').html('<div id="cart-total">' + json['total'] + '</div>');
 				}, 100);
-
+					
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
 					location = 'index.php?route=checkout/cart';
 				} else {
 					$('#cart > ul').load('index.php?route=common/cart/info ul li');
 				}
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		});
 	}
@@ -238,15 +239,15 @@ var voucher = {
 			data: 'key=' + key,
 			dataType: 'json',
 			beforeSend: function() {
-				$('#cart > button').button('loading');
+				$('#cart .cart_button').button('loading');
 			},
 			complete: function() {
-				$('#cart > button').button('reset');
+				$('#cart .cart_button').button('reset');
 			},
 			success: function(json) {
 				// Need to set timeout otherwise it wont update the total
 				setTimeout(function () {
-					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					$('#cart .cart_button').html('<div id="cart-total">' + json['total'] + '</div>');
 				}, 100);
 
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
@@ -254,9 +255,6 @@ var voucher = {
 				} else {
 					$('#cart > ul').load('index.php?route=common/cart/info ul li');
 				}
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		});
 	}
@@ -271,23 +269,25 @@ var wishlist = {
 			dataType: 'json',
 			success: function(json) {
 				$('.alert').remove();
-
+				
 				if (json['redirect']) {
-					location = json['redirect'];
-				}
-
+				location = json['redirect'];
+					}
+		
 				if (json['success']) {
-					$('#content').parent().before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					$('.common-home .content_breadcum').after('<div class="alert alert-success container"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					
+					$('ul.breadcrumb').after('<div class="alert alert-success container"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 				}
 
-				$('#wishlist-total span').html(json['total']);
+				$('#wishlist-total').html(json['total']);
 				$('#wishlist-total').attr('title', json['total']);
 
 				$('html, body').animate({ scrollTop: 0 }, 'slow');
 			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-			}
+	        error: function(xhr, ajaxOptions, thrownError) {
+	            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+	        }
 		});
 	},
 	'remove': function() {
@@ -306,16 +306,18 @@ var compare = {
 				$('.alert').remove();
 
 				if (json['success']) {
-					$('#content').parent().before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					$('.common-home .content_breadcum').after('<div class="alert alert-success container"><i class="fa fa-check-circle"></i> ' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					
+					$('ul.breadcrumb').after('<div class="alert alert-success container"><i class="fa fa-check-circle"></i> ' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
 					$('#compare-total').html(json['total']);
 
 					$('html, body').animate({ scrollTop: 0 }, 'slow');
 				}
 			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-			}
+	        error: function(xhr, ajaxOptions, thrownError) {
+	            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+	        }
 		});
 	},
 	'remove': function() {
@@ -361,23 +363,23 @@ $(document).delegate('.agree', 'click', function(e) {
 		return this.each(function() {
 			this.timer = null;
 			this.items = new Array();
-
+	
 			$.extend(this, option);
-
+	
 			$(this).attr('autocomplete', 'off');
-
+			
 			// Focus
 			$(this).on('focus', function() {
 				this.request();
 			});
-
+			
 			// Blur
 			$(this).on('blur', function() {
 				setTimeout(function(object) {
 					object.hide();
-				}, 200, this);
+				}, 200, this);				
 			});
-
+			
 			// Keydown
 			$(this).on('keydown', function(event) {
 				switch(event.keyCode) {
@@ -387,64 +389,64 @@ $(document).delegate('.agree', 'click', function(e) {
 					default:
 						this.request();
 						break;
-				}
+				}				
 			});
-
+			
 			// Click
 			this.click = function(event) {
 				event.preventDefault();
-
+	
 				value = $(event.target).parent().attr('data-value');
-
+	
 				if (value && this.items[value]) {
 					this.select(this.items[value]);
 				}
 			}
-
+			
 			// Show
 			this.show = function() {
 				var pos = $(this).position();
-
+	
 				$(this).siblings('ul.dropdown-menu').css({
 					top: pos.top + $(this).outerHeight(),
 					left: pos.left
 				});
-
+	
 				$(this).siblings('ul.dropdown-menu').show();
 			}
-
+			
 			// Hide
 			this.hide = function() {
 				$(this).siblings('ul.dropdown-menu').hide();
-			}
-
+			}		
+			
 			// Request
 			this.request = function() {
 				clearTimeout(this.timer);
-
+		
 				this.timer = setTimeout(function(object) {
 					object.source($(object).val(), $.proxy(object.response, object));
 				}, 200, this);
 			}
-
+			
 			// Response
 			this.response = function(json) {
 				html = '';
-
+	
 				if (json.length) {
 					for (i = 0; i < json.length; i++) {
 						this.items[json[i]['value']] = json[i];
 					}
-
+	
 					for (i = 0; i < json.length; i++) {
 						if (!json[i]['category']) {
 							html += '<li data-value="' + json[i]['value'] + '"><a href="#">' + json[i]['label'] + '</a></li>';
 						}
 					}
-
+	
 					// Get all the ones with a categories
 					var category = new Array();
-
+	
 					for (i = 0; i < json.length; i++) {
 						if (json[i]['category']) {
 							if (!category[json[i]['category']]) {
@@ -452,32 +454,32 @@ $(document).delegate('.agree', 'click', function(e) {
 								category[json[i]['category']]['name'] = json[i]['category'];
 								category[json[i]['category']]['item'] = new Array();
 							}
-
+	
 							category[json[i]['category']]['item'].push(json[i]);
 						}
 					}
-
+	
 					for (i in category) {
 						html += '<li class="dropdown-header">' + category[i]['name'] + '</li>';
-
+	
 						for (j = 0; j < category[i]['item'].length; j++) {
 							html += '<li data-value="' + category[i]['item'][j]['value'] + '"><a href="#">&nbsp;&nbsp;&nbsp;' + category[i]['item'][j]['label'] + '</a></li>';
 						}
 					}
 				}
-
+	
 				if (html) {
 					this.show();
 				} else {
 					this.hide();
 				}
-
+	
 				$(this).siblings('ul.dropdown-menu').html(html);
 			}
-
+			
 			$(this).after('<ul class="dropdown-menu"></ul>');
-			$(this).siblings('ul.dropdown-menu').delegate('a', 'click', $.proxy(this.click, this));
-
+			$(this).siblings('ul.dropdown-menu').delegate('a', 'click', $.proxy(this.click, this));	
+			
 		});
 	}
 })(window.jQuery);

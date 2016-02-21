@@ -1,12 +1,13 @@
 <?php
 class ControllerModuleSlideshow extends Controller {
 	public function index($setting) {
-		static $module = 0;		
+		static $module = 0;
 
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
 
 		$this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+		$this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.transitions.css');
 		$this->document->addScript('catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js');
 
 		$data['banners'] = array();
@@ -25,6 +26,10 @@ class ControllerModuleSlideshow extends Controller {
 
 		$data['module'] = $module++;
 
-		return $this->load->view('module/slideshow', $data);
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/slideshow.tpl')) {
+			return $this->load->view($this->config->get('config_template') . '/template/module/slideshow.tpl', $data);
+		} else {
+			return $this->load->view('default/template/module/slideshow.tpl', $data);
+		}
 	}
 }
