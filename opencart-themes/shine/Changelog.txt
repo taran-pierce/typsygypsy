@@ -1,0 +1,139 @@
+OPC080190 Update History
+==============================================================================================
+
+Updated Date : 14-10-2015
+=============================================================================================================
+Version : Opencart_2.1.0.1
+=============================================================================================================
+
+Updates Blog files for support latest version.
+
+admin updates file:-
+
+admin\model:-
+
+	1) megnor\blogger.php
+
+Catalog Updates Files:-
+
+catalog\controller: -
+	
+	1)..\information\blogger.php
+
+catalog\language\english :-
+
+	1) ..\information\blogger.php	
+
+catalog\view\theme\OPC080190\stylesheet :-
+
+	1) ...\stylesheet.css
+
+catalog\view\theme\OPC080190\template :-	
+
+	1) ..\information\blogger.tpl 
+
+
+
+
+Updated Date : 13-10-2015
+=============================================================================================================
+Version : Opencart_2.1.0.1
+=============================================================================================================
+
+Updates files for support latest version.
+
+Documentation Updated.
+
+admin updates file:-
+
+admin\controller:-
+
+	1)..\design\layout.php
+
+Catalog Updates Files:-
+
+catalog\controller: -
+	
+	1)..\common\header.php
+	
+	2)..\common\footer.php
+
+	3)..\product\product.php
+
+catalog\view\javascript :-
+
+	1) ...\common.js	
+
+catalog\view\theme\OPC080190\stylesheet :-
+
+	1) ...\stylesheet.css
+
+catalog\view\theme\OPC080190\template :-	
+
+	1) ..\checkout\cart.tpl
+
+	2) ..\checkout\checkout.tpl
+
+	3) ..\checkout\register.tpl
+
+	4) ..\common\cart.tpl 
+
+	5) ..\common\header.tpl 
+
+	6) ..\information\contact.tpl 
+
+	7) ..\product\compare.tpl 
+
+	8) ..\product\product.tpl 
+
+	9) ..\module\blogger.tpl
+
+
+
+
+Updated Date : 13-10-2015
+=============================================================================================================
+Version : Opencart_2.0.3.1
+=============================================================================================================
+
+Catalog Updates Files:-
+
+catalog\controller: -
+	
+	1)..\common\header.php
+	
+	2) ..\model\megnor\blogger.php
+
+catalog\view\javascript :-
+
+	1) ...\common.js	
+
+catalog\view\theme\OPC080190\stylesheet :-
+
+	1) ...\stylesheet.css
+
+catalog\view\theme\OPC080190\template :-	
+
+	1) ..\checkout\checkout.tpl
+
+	2) ..\common\header.tpl 
+
+	3) ..\module\blogger.tpl 
+
+	4) ..\module\banner.tpl 
+
+	5) ..\module\bestseller.tpl 
+
+	6) ..\module\featured.tpl
+
+	7) ..\module\filter.tpl 
+
+	8) ..\module\latest.tpl 
+
+	9) ..\module\megnortabs.tpl
+
+	10) ..\module\slideshow.tpl
+
+	11) ..\module\special.tpl
+
+
