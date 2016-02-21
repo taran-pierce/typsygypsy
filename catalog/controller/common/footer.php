@@ -4,7 +4,6 @@ class ControllerCommonFooter extends Controller {
         $this->load->language('common/footer');
 
         $data['scripts'] = $this->document->getScripts('footer');
-
         $data['text_information'] = $this->language->get('text_information');
         $data['text_service'] = $this->language->get('text_service');
         $data['text_extra'] = $this->language->get('text_extra');
@@ -21,7 +20,6 @@ class ControllerCommonFooter extends Controller {
         $data['text_newsletter'] = $this->language->get('text_newsletter');
 
         $this->load->model('catalog/information');
-
         $data['informations'] = array();
 
         foreach ($this->model_catalog_information->getInformations() as $result) {
@@ -33,7 +31,7 @@ class ControllerCommonFooter extends Controller {
             }
         }
 
-$data['contact'] = $this->url->link('information/contact');
+		$data['contact'] = $this->url->link('information/contact');
         $data['return'] = $this->url->link('account/return/add', '', true);
         $data['sitemap'] = $this->url->link('information/sitemap');
         $data['manufacturer'] = $this->url->link('product/manufacturer');
@@ -46,6 +44,24 @@ $data['contact'] = $this->url->link('information/contact');
         $data['newsletter'] = $this->url->link('account/newsletter', '', true);
 
         $data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+
+		$data['footerbottom'] = $this->load->controller('common/footerbottom');
+        $data['footerleft'] = $this->load->controller('common/footerleft');
+        $data['footerright'] = $this->load->controller('common/footerright');
+
+		// Manufacture
+        $this->language->load('product/manufacturer');
+        $this->load->model('catalog/manufacturer');
+        $data['manufacturer_list'] = array();
+        $manufacturers = $this->model_catalog_manufacturer->getManufacturers();
+
+        foreach ($manufacturers as $manufacturer_list) {
+            $data['manufacturer_list'][] = array(
+                'name' => $manufacturer_list['name'],
+                'href' => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer_list['manufacturer_id'])
+            );
+        }
+        //End Manufacure
 
         // Whos Online
         if ($this->config->get('config_customer_online')) {
@@ -72,6 +88,13 @@ $data['contact'] = $this->url->link('information/contact');
             $this->model_tool_online->addOnline($ip, $this->customer->getId(), $url, $referer);
         }
 
-        return $this->load->view('common/footer', $data);
+		// TODO here is the issue, same place as last time 
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {
+            return $this->load->view($this->config->get('config_template') . '/template/common/footer.tpl', $data);
+        } else {
+			// TODO fixed: the way they referenced the default header was broken
+            //return $this->load->view('default/template/common/footer.tpl', $data);
+			return $this->load->view('common/footer', $data);
+        }
     }
 }
