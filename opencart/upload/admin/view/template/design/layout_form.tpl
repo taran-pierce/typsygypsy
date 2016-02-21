@@ -124,59 +124,7 @@
                     <?php } else { ?>
                     <option value="column_right"><?php echo $text_column_right; ?></option>
                     <?php } ?>
-					
-					
-					<?php if ($layout_module['position'] == 'footerleft') { ?>
-                    <option value="footerleft" selected="selected"><?php echo $text_footerleft; ?></option>
-                    <?php } else { ?>
-                    <option value="footerleft"><?php echo $text_footerleft; ?></option>
-                    <?php } ?>
-					
-					<?php if ($layout_module['position'] == 'footerright') { ?>
-                    <option value="footerright" selected="selected"><?php echo $text_footerright; ?></option>
-                    <?php } else { ?>
-                    <option value="footerright"><?php echo $text_footerright; ?></option>
-                    <?php } ?>
-					
-					<?php if ($layout_module['position'] == 'footerbottom') { ?>
-                    <option value="footerbottom" selected="selected"><?php echo $text_footerbottom; ?></option>
-                    <?php } else { ?>
-                    <option value="footerbottom"><?php echo $text_footerbottom; ?></option>
-                    <?php } ?>
-					
-					<?php if ($layout_module['position'] == 'headertopleft') { ?>
-                    <option value="headertopleft" selected="selected"><?php echo $text_headertopleft; ?></option>
-                    <?php } else { ?>
-                    <option value="headertopleft"><?php echo $text_headertopleft; ?></option>
-                    <?php } ?>
-					
-					<?php if ($layout_module['position'] == 'headertopright') { ?>
-                    <option value="headertopright" selected="selected"><?php echo $text_headertopright; ?></option>
-                    <?php } else { ?>
-                    <option value="headertopright"><?php echo $text_headertopright; ?></option>
-                    <?php } ?>
-					
-					<?php if ($layout_module['position'] == 'headernav') { ?>
-                    <option value="headernav" selected="selected"><?php echo $text_headernav; ?></option>
-                    <?php } else { ?>
-                    <option value="headernav"><?php echo $text_headernav; ?></option>
-                    <?php } ?>
-					
-					<?php if ($layout_module['position'] == 'headerbottom') { ?>
-                    <option value="headerbottom" selected="selected"><?php echo $text_headerbottom; ?></option>
-                    <?php } else { ?>
-                    <option value="headerbottom"><?php echo $text_headerbottom; ?></option>
-                    <?php } ?>
-					
-					<?php if ($layout_module['position'] == 'productpage') { ?>
-                    <option value="productpage" selected="selected"><?php echo $text_productpage; ?></option>
-                    <?php } else { ?>
-                    <option value="productpage"><?php echo $text_productpage; ?></option>
-                    <?php } ?>
-					
-                  </select>
-				  
-				  </td>
+                  </select></td>
                 <td class="text-right"><input type="text" name="layout_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $layout_module['sort_order']; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>
                 <td class="text-left"><button type="button" onclick="$('#module-row<?php echo $module_row; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
               </tr>
@@ -235,19 +183,7 @@ function addModule() {
     html += '    <option value="content_top"><?php echo $text_content_top; ?></option>';
     html += '    <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
     html += '    <option value="column_left"><?php echo $text_column_left; ?></option>';
-    
-	html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
-	
-	html += '    <option value="footerleft"><?php echo $text_footerleft; ?></option>';
-	html += '    <option value="footerright"><?php echo $text_footerright; ?></option>';
-	html += '    <option value="footerbottom"><?php echo $text_footerbottom; ?></option>';
-	html += '    <option value="headertopleft"><?php echo $text_headertopleft; ?></option>';
-	html += '    <option value="headertopright"><?php echo $text_headertopright; ?></option>';
-	html += '    <option value="headernav"><?php echo $text_headernav; ?></option>';
-	html += '    <option value="headerbottom"><?php echo $text_headerbottom; ?></option>';
-	
-	html += '    <option value="productpage"><?php echo $text_productpage; ?></option>';
-	
+    html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
     html += '  </select></td>';
 	html += '  <td class="text-left"><input type="text" name="layout_module[' + module_row + '][sort_order]" value="" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>';
 	html += '  <td class="text-left"><button type="button" onclick="$(\'#module-row' + module_row + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';

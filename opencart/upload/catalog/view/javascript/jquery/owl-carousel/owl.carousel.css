@@ -1,4 +1,4 @@
-/* 
+/*
  * 	Core Owl Carousel CSS File
  *	v1.3.3
  */
@@ -13,187 +13,121 @@
 	height: 0;
 }
 /* display none until init */
-.owl-carousel{
+.owl-carousel {
 	display: none;
 	position: relative;
 	width: 100%;
 	-ms-touch-action: pan-y;
 }
-.owl-carousel .owl-wrapper{
+.owl-carousel .owl-wrapper {
 	display: none;
 	position: relative;
-    -o-transform: translate3d(0px,0px,0px);
-    transform: translate3d(0px,0px,0px);
-    -webkit-transform: translate3d(0px,0px,0px);
-    -moz-transform: translate3d(0px,0px,0px);
-    -ms-transform: translate3d(0px,0px,0px);
+	-webkit-transform: translate3d(0px, 0px, 0px);
 }
-.owl-carousel .owl-wrapper-outer{
+.owl-carousel .owl-wrapper-outer {
 	overflow: hidden;
 	position: relative;
 	width: 100%;
 }
-.owl-carousel .owl-wrapper-outer.autoHeight{
+.owl-carousel .owl-wrapper-outer.autoHeight {
 	-webkit-transition: height 500ms ease-in-out;
 	-moz-transition: height 500ms ease-in-out;
 	-ms-transition: height 500ms ease-in-out;
 	-o-transition: height 500ms ease-in-out;
 	transition: height 500ms ease-in-out;
 }
-	
-.owl-carousel .owl-item{
+.owl-carousel .owl-item {
 	float: left;
 }
-.owl-controls .owl-page,
-.owl-controls .owl-buttons div{
+.owl-controls .owl-page, .owl-controls .owl-buttons div {
 	cursor: pointer;
 }
 .owl-controls .owl-buttons div {
-  position: absolute;
+	position: absolute;
 }
- 
+.owl-controls .owl-buttons .owl-prev {
+	left: 10px;
+	top: 50%;
+}
+.owl-controls .owl-buttons .owl-next {
+	right: 10px;
+	top: 50%;
+}
 .owl-controls {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
 /* mouse grab icon */
-.grabbing { 
-    cursor:url(grabbing.png) 8 8, move;
+.grabbing {
+	cursor: url(grabbing.png) 8 8, move;
 }
-
 /* fix */
-.owl-carousel  .owl-wrapper,
-.owl-carousel  .owl-item{
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility:    hidden;
-  -ms-backface-visibility:     hidden;
-  -o-transform: translate3d(0px,0px,0px);
-  transform: translate3d(0px,0px,0px);
-  -webkit-transform: translate3d(0px,0px,0px);
-  -moz-transform: translate3d(0px,0px,0px);
-  -ms-transform: translate3d(0px,0px,0px);
+.owl-carousel .owl-wrapper, .owl-carousel .owl-item {
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	-ms-transform: translate3d(0, 0, 0);
 }
-
 /* OpenCart Code */
 .owl-carousel {
-	margin: 0 0 30px; 
+	margin: 0 0 20px;
+	background: #fff;
 	direction: ltr !important;
-	overflow: hidden;
-	z-index:1;
+	z-index: 1;
+}
+.owl-wrapper-outer {
+	border: 4px solid #fff;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+	-o-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+	box-shadow: 0 1px 4px rgba(0,0,0,.2);
 }
 .owl-carousel .owl-buttons div {
+	opacity: 0;
+	color: rgba(0,0,0,0.8);
+	text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+	transition: all .3s ease;
 }
 .owl-carousel:hover .owl-buttons div {
-}
-.owl-carousel .owl-buttons div i {
-}
-
-.owl-carousel .owl-buttons .owl-prev i{
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    font-size: 0;
-    left: 0;
-    position: absolute;
-    top: 0;
-}
-.owl-carousel .owl-buttons .owl-next i{
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    font-size: 0;
-    right: 0;
-    position: absolute;
-    top: 0;
+	opacity: 0.7;
 }
 .owl-carousel .owl-buttons .owl-prev {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    font-size: 0;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 350px;
+	left: 10px;
 }
 .owl-carousel .owl-buttons .owl-next {
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    font-size: 0;
-    height: 100%;
-    right: 0;
-    position: absolute;
-    top: 0;
-    width: 350px;
+	right: 10px;
+}
+.owl-carousel .owl-buttons div i {
+	font-size: 40px;
+	margin: -20px 0 0;
 }
 .owl-pagination {
 	text-align: center;
-	bottom: 10px;
-	position: absolute;
-	margin:0 auto;
-	left:0;
-	right:0;
+	top: 20px;
+	position: relative;
 }
 .owl-controls .owl-page {
 	display: inline-block;
-	cursor: pointer;
-    height: 12px;
-    margin: 0 3px;
-    position: relative;
-    width: 12px;
-	text-align:center;
+	margin: 0px 6px;
 }
-
 .owl-controls .owl-page span {
-	background-color: #c9c9c9;
-    box-shadow: 0 0 0 2px #c9c9c9 inset;
-	-webkit-box-shadow: 0 0 0 2px #c9c9c9 inset;
-	-moz-box-shadow: 0 0 0 2px #c9c9c9 inset;
-    overflow: hidden;
-    transition: opacity 0.5s ease 0s;
-	-webkit-transition: opacity 0.5s ease 0s;
-	-moz-transition: opacity 0.5s ease 0s;
-	-ms-transition: opacity 0.5s ease 0s;
-	-o-transition: opacity 0.5s ease 0s;
-    border-radius: 50%;
-	-webkit-border-radius: 50%;
-	-khtml-border-radius: 50%;
-	-moz-border-radius: 50%;
-    cursor: pointer;
-    height: 100%;
-    left: 0;
-    outline: medium none;
-    position: absolute;
-    text-indent: -999em;
-    top: 0;
-    width: 100%;
+	display: block;
+	width: 11px;
+	height: 11px;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 20px;
+	box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
 }
-
-.owl-controls .owl-page span::after{
-	background-color: #2c2c2c;
-    border-radius: 50%;
-	-webkit-border-radius: 50%;
-	-khtml-border-radius: 50%;
-	-moz-border-radius: 50%;
-    content: "";
-    height: 100%;
-    left: 0;
-    position: absolute;
-    transform: scale(0);
-	-webkit-transform: scale(0);
-	-moz-transform: scale(0);
-	-ms-transform: scale(0);
-	-o-transform: scale(0);
-    transform-origin: 50% 50% 0;
-	-moz-transform-origin: 50% 50% 0;
-	-webkit-transform-origin: 50% 50% 0;
-	-ms-transform-origin: 50% 50% 0;
-	-o-transform-origin: 50% 50% 0;
-    transition: transform 0.5s ease 0s;
-	-webkit-transition: transform 0.5s ease 0s;
-	-moz-transition: transform 0.5s ease 0s;
-	-ms-transition: transform 0.5s ease 0s;
-	-o-transition: transform 0.5s ease 0s;
-    width: 100%;
-}
-.owl-controls .owl-page.active span::after,.owl-controls .owl-page:hover span::after  {
-	transform: scale(1);
-	-webkit-transform: scale(1);
-	-moz-transform: scale(1);
-	-ms-transform: scale(1);
-	-o-transform: scale(1);
+.owl-controls .owl-page.active span {
+	background: rgba(0, 0, 0, 0.9);
 }
