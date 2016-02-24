@@ -1,3 +1,3 @@
 <?php
 // Text
-$_['text_language'] = 'Lan';
+$_['text_language'] = 'Language';
