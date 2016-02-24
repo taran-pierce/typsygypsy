@@ -3,8 +3,8 @@
 define('VERSION', '2.1.0.2');
 
 // Configuration
-if (is_file('config.php')) {
-	require_once('config.php');
+if (is_file('../../config_files/admin/config.php')) {
+	require_once('../../config_files/admin/config.php');
 }
 
 // Install
