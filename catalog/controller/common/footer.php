@@ -46,6 +46,29 @@ class ControllerCommonFooter extends Controller {
 		$data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
 
 		$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+		
+		
+		$data['footerbottom'] = $this->load->controller('common/footerbottom');
+		$data['footerleft'] = $this->load->controller('common/footerleft');
+		$data['footerright'] = $this->load->controller('common/footerright');
+		
+		// Manufacture
+		$this->language->load('product/manufacturer');
+
+		$this->load->model('catalog/manufacturer');
+		
+		$data['manufacturer_list'] = array();
+		
+		$manufacturers = $this->model_catalog_manufacturer->getManufacturers();
+		
+		foreach ($manufacturers as $manufacturer_list) {
+			$data['manufacturer_list'][] = array(
+				'name' => $manufacturer_list['name'],
+				'href' => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer_list['manufacturer_id'])
+			);
+		}
+		//End Manufacure
+		
 
 		// Whos Online
 		if ($this->config->get('config_customer_online')) {
@@ -71,6 +94,12 @@ class ControllerCommonFooter extends Controller {
 
 			$this->model_tool_online->addOnline($ip, $this->customer->getId(), $url, $referer);
 		}
+		
+		$data['footerbottom'] = $this->load->controller('common/footerbottom');
+		$data['footerleft'] = $this->load->controller('common/footerleft');
+		$data['footerright'] = $this->load->controller('common/footerright');
+
+
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {
 			return $this->load->view($this->config->get('config_template') . '/template/common/footer.tpl', $data);

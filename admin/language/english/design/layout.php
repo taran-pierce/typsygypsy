@@ -13,6 +13,17 @@ $_['text_content_bottom'] = 'Content Bottom';
 $_['text_column_left']    = 'Column Left';
 $_['text_column_right']   = 'Column Right';
 
+$_['text_footerleft']    = 'Footer Left';
+$_['text_footerright']    = 'Footer Right';
+$_['text_footerbottom']    = 'Footer Bottom';
+
+$_['text_headertopleft']    = 'HeaderTop Left';
+$_['text_headertopright']    = 'HeaderTop Right';
+$_['text_headernav']    = 'HeaderMenu link';
+$_['text_headerbottom']    = 'Header Bottom';
+
+$_['text_productpage']	= 'Productpage';
+
 // Column
 $_['column_name']         = 'Layout Name';
 $_['column_action']       = 'Action';
